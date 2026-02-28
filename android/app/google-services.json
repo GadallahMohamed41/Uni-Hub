@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "201349891361",
+    "project_id": "university-connect-52779",
+    "storage_bucket": "university-connect-52779.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201349891361:android:3dd2bfaad9de4fc9d6ea60",
+        "android_client_info": {
+          "package_name": "com.example.project_test2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC4mpmwc7kovzqpqnjdpqPt4xzy_9SZvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201349891361:android:f2a742fe5fbfc307d6ea60",
+        "android_client_info": {
+          "package_name": "com.natu.students"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC4mpmwc7kovzqpqnjdpqPt4xzy_9SZvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

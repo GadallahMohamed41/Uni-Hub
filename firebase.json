@@ -1,0 +1,15 @@
+{
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ],
+  "flutter": {"platforms":{"android":{"default":{"projectId":"university-connect-52779","appId":"1:201349891361:android:3dd2bfaad9de4fc9d6ea60","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"university-connect-52779","configurations":{"android":"1:201349891361:android:3dd2bfaad9de4fc9d6ea60","ios":"1:201349891361:ios:fb72bd7b70d93f58d6ea60","macos":"1:201349891361:ios:fb72bd7b70d93f58d6ea60","web":"1:201349891361:web:351852060e565fcdd6ea60","windows":"1:201349891361:web:e4a36cd39e998248d6ea60"}}}}}}

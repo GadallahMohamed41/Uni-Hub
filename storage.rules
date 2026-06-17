@@ -1,0 +1,29 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    // PDF Certificates (Strict validation: PDF only, max 10MB)
+    match /users/{userId}/certificates/{fileName} {
+      allow read: if signedIn() && (isOwner(userId) || request.auth.token.role == 'admin');
+      allow write: if isOwner(userId)
+        && request.resource.size < 10 * 1024 * 1024
+        && request.resource.contentType == 'application/pdf';
+    }
+
+    // Post media, community feeds, cover photos, etc.
+    match /media/{userId}/{fileName} {
+      allow read: if signedIn();
+      allow write: if isOwner(userId)
+        && request.resource.size < 50 * 1024 * 1024 // Max 50MB
+        && request.resource.contentType.matches('image/.*|video/.*|audio/.*');
+    }
+  }
+}

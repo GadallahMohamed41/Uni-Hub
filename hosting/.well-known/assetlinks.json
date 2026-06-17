@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.natu.students",
+      "sha256_cert_fingerprints": [
+        "26:C8:A5:A5:FF:11:0F:42:F2:0D:6C:C7:35:76:68:74:B0:3A:92:D2:82:4D:6A:CF:00:5E:5B:02:A5:85:73:1B"
+      ]
+    }
+  }
+]

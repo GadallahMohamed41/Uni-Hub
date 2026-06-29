@@ -55,18 +55,23 @@ dependencies:
   gal: ^2.3.2
   flutter_secure_storage: ^10.3.0
   firebase_app_check: ^0.4.4+2
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  flutter_launcher_icons: ^0.14.4
 
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: lib/assets/images/logo-removebg.png
+  web:
+    generate: true
+    image_path: "lib/assets/icons/android/play_store_512.png"
+  image_path: lib/assets/icons/android/play_store_512.png
   min_sdk_android: 21
+  adaptive_icon_background: "#051b44"
+  adaptive_icon_foreground: "lib/assets/icons/android/play_store_512.png"
 
 flutter:
   uses-material-design: true
@@ -74,4 +79,3 @@ flutter:
     - lib/assets/images/
     - lib/assets/icons/
     - lib/assets/certs/
-    

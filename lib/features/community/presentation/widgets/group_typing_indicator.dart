@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme.dart';
+import 'package:project_test2/core/theme/theme.dart';
 
 /// WhatsApp-style typing indicator showing bouncing dots and names.
 class GroupTypingIndicator extends StatefulWidget {

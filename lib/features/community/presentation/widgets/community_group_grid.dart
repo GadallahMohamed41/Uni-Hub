@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../domain/entities/group_entity.dart';
-import '../../../../core/theme.dart';
+import 'package:project_test2/features/community/domain/entities/group_entity.dart';
+import 'package:project_test2/core/theme/theme.dart';
 
 /// Horizontal scrollable grid of community groups.
 /// Each card shows the group name and lets users join/enter.

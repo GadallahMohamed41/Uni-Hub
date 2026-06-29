@@ -6,24 +6,25 @@ import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 
-import '../../../../core/theme.dart';
-import '../../../../providers/auth_provider.dart';
+import 'package:project_test2/core/theme/theme.dart';
+import 'package:project_test2/features/auth/presentation/providers/auth_provider.dart';
 import 'package:flutter/services.dart';
-import '../../../../services/storage_service.dart';
-import '../../data/repositories/chat_repository_impl.dart';
-import '../bloc/messages_bloc/messages_bloc.dart';
-import '../bloc/messages_bloc/messages_event.dart';
-import '../bloc/messages_bloc/messages_state.dart';
-import '../widgets/message_bubble.dart';
-import '../widgets/typing_indicator.dart';
-import '../widgets/voice_recorder_bar.dart';
-import '../widgets/mute_bottom_sheet.dart';
-import '../bloc/conversations_bloc/conversations_bloc.dart';
-import '../bloc/conversations_bloc/conversations_event.dart';
-import '../bloc/conversations_bloc/conversations_state.dart';
-import '../../domain/entities/message_entity.dart';
+import 'package:project_test2/core/services/storage_service.dart';
+import 'package:project_test2/features/chat/data/repositories/chat_repository_impl.dart';
+import 'package:project_test2/features/chat/presentation/bloc/messages_bloc/messages_bloc.dart';
+import 'package:project_test2/features/chat/presentation/bloc/messages_bloc/messages_event.dart';
+import 'package:project_test2/features/chat/presentation/bloc/messages_bloc/messages_state.dart';
+import 'package:project_test2/features/chat/presentation/widgets/message_bubble.dart';
+import 'package:project_test2/features/chat/presentation/widgets/typing_indicator.dart';
+import 'package:project_test2/features/chat/presentation/widgets/voice_recorder_bar.dart';
+import 'package:project_test2/features/chat/presentation/widgets/mute_bottom_sheet.dart';
+import 'package:project_test2/features/chat/presentation/bloc/conversations_bloc/conversations_bloc.dart';
+import 'package:project_test2/features/chat/presentation/bloc/conversations_bloc/conversations_event.dart';
+import 'package:project_test2/features/chat/presentation/bloc/conversations_bloc/conversations_state.dart';
+import 'package:project_test2/features/chat/domain/entities/message_entity.dart';
+import 'package:project_test2/features/profile/presentation/screens/user_profile_screen.dart';
 
 class DirectMessageScreen extends StatelessWidget {
   final String conversationId;
@@ -106,6 +107,8 @@ class _DirectMessageViewState extends State<_DirectMessageView>
   // Message selection
   String? _selectedMessageId;
   String? _lastErrorShown;
+  bool _isSearchingMessages = false;
+  String _messageSearchQuery = '';
 
   @override
   void initState() {
@@ -137,6 +140,13 @@ class _DirectMessageViewState extends State<_DirectMessageView>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       context.read<MessagesBloc>().add(const MessagesSeen());
+    } else if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
+      if (_isRecordingVoice && !_isVoiceLocked) {
+        setState(() {
+          _isVoiceLocked = true;
+        });
+      }
+      _voiceBarKey.currentState?.handleInterruption();
     }
   }
 
@@ -342,11 +352,8 @@ class _DirectMessageViewState extends State<_DirectMessageView>
       if (localMessageId != null) {
         _messagesBloc.add(LocalMessageRemoved(localMessageId));
       }
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to send voice message: $e')),
-        );
-      }
+      debugPrint('Error sending voice message: $e');
+      _showSnack('فشل إرسال الرسالة الصوتية. يرجى التحقق من الاتصال بالإنترنت والمحاولة مجدداً.');
     }
   }
 
@@ -427,115 +434,155 @@ class _DirectMessageViewState extends State<_DirectMessageView>
             color: Colors.white, size: 20),
         onPressed: () => Navigator.pop(context),
       ),
-      title: Row(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border:
-                  Border.all(color: Colors.white.withValues(alpha: 0.3), width: 2),
-            ),
-            child: CircleAvatar(
-              radius: 18,
-              backgroundColor: Colors.white.withValues(alpha: 0.2),
-              backgroundImage: avatarUrl.isNotEmpty
-                  ? CachedNetworkImageProvider(avatarUrl)
-                  : null,
-              child: avatarUrl.isEmpty
-                  ? Text(
-                      widget.otherUserName.isNotEmpty
-                          ? widget.otherUserName[0].toUpperCase()
-                          : '?',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                      ),
-                    )
-                  : null,
-            ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: BlocBuilder<MessagesBloc, MessagesState>(
-              buildWhen: (prev, curr) {
-                if (prev is MessagesLoaded && curr is MessagesLoaded) {
-                  return prev.isOtherTyping != curr.isOtherTyping;
-                }
-                return false;
+      title: _isSearchingMessages
+          ? TextField(
+              autofocus: true,
+              style: const TextStyle(color: Colors.white, fontSize: 16),
+              decoration: const InputDecoration(
+                hintText: 'البحث في الرسائل...',
+                hintStyle: TextStyle(color: Colors.white70, fontSize: 16),
+                border: InputBorder.none,
+              ),
+              onChanged: (val) {
+                setState(() {
+                  _messageSearchQuery = val.trim();
+                });
               },
-              builder: (_, state) {
-                final isTyping =
-                    state is MessagesLoaded && state.isOtherTyping;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            widget.otherUserName,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        if (conversationsBloc != null)
-                          BlocBuilder<ConversationsBloc, ConversationsState>(
-                            bloc: conversationsBloc,
-                            builder: (context, convState) {
-                              if (convState is ConversationsLoaded) {
-                                try {
-                                  final conv = convState.conversations
-                                      .firstWhere((c) =>
-                                          c.id == widget.conversationId);
-                                  if (conv.isMuted(widget.myId)) {
-                                    return const Padding(
-                                      padding: EdgeInsets.only(left: 6),
-                                      child: Icon(Icons.volume_off_rounded,
-                                          size: 14, color: Colors.white70),
-                                    );
-                                  }
-                                } catch (_) {}
-                              }
-                              return const SizedBox.shrink();
-                            },
-                          ),
-                      ],
-                    ),
-                    AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 200),
-                      child: isTyping
-                          ? Text(
-                              'typing...',
-                              key: const ValueKey('typing'),
-                              style: TextStyle(
-                                color: Colors.white.withValues(alpha: 0.8),
-                                fontSize: 11,
-                                fontStyle: FontStyle.italic,
-                              ),
-                            )
-                          : Text(
-                              'tap to view profile',
-                              key: const ValueKey('online'),
-                              style: TextStyle(
-                                color: Colors.white.withValues(alpha: 0.6),
-                                fontSize: 11,
-                              ),
-                            ),
-                    ),
-                  ],
+            )
+          : GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => UserProfileScreen(userId: widget.otherUserId),
+                  ),
                 );
               },
+              behavior: HitTestBehavior.opaque,
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border:
+                          Border.all(color: Colors.white.withValues(alpha: 0.3), width: 2),
+                    ),
+                    child: CircleAvatar(
+                      radius: 18,
+                      backgroundColor: Colors.white.withValues(alpha: 0.2),
+                      backgroundImage: avatarUrl.isNotEmpty
+                          ? CachedNetworkImageProvider(avatarUrl)
+                          : null,
+                      child: avatarUrl.isEmpty
+                          ? Text(
+                              widget.otherUserName.isNotEmpty
+                                  ? widget.otherUserName[0].toUpperCase()
+                                  : '?',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14,
+                              ),
+                            )
+                          : null,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: BlocBuilder<MessagesBloc, MessagesState>(
+                      buildWhen: (prev, curr) {
+                        if (prev is MessagesLoaded && curr is MessagesLoaded) {
+                          return prev.isOtherTyping != curr.isOtherTyping;
+                        }
+                        return false;
+                      },
+                      builder: (_, state) {
+                        final isTyping =
+                            state is MessagesLoaded && state.isOtherTyping;
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    widget.otherUserName,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 16,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                if (conversationsBloc != null)
+                                  BlocBuilder<ConversationsBloc, ConversationsState>(
+                                    bloc: conversationsBloc,
+                                    builder: (context, convState) {
+                                      if (convState is ConversationsLoaded) {
+                                        try {
+                                          final conv = convState.conversations
+                                              .firstWhere((c) =>
+                                                  c.id == widget.conversationId);
+                                          if (conv.isMuted(widget.myId)) {
+                                            return const Padding(
+                                              padding: EdgeInsets.only(left: 6),
+                                              child: Icon(Icons.volume_off_rounded,
+                                                  size: 14, color: Colors.white70),
+                                            );
+                                          }
+                                        } catch (_) {}
+                                      }
+                                      return const SizedBox.shrink();
+                                    },
+                                  ),
+                              ],
+                            ),
+                            AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 200),
+                              child: isTyping
+                                  ? Text(
+                                      'typing...',
+                                      key: const ValueKey('typing'),
+                                      style: TextStyle(
+                                        color: Colors.white.withValues(alpha: 0.8),
+                                        fontSize: 11,
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                    )
+                                  : Text(
+                                      'tap to view profile',
+                                      key: const ValueKey('online'),
+                                      style: TextStyle(
+                                        color: Colors.white.withValues(alpha: 0.6),
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
       actions: [
-        if (conversationsBloc != null)
+        IconButton(
+          icon: Icon(
+            _isSearchingMessages ? Icons.close_rounded : Icons.search_rounded,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            setState(() {
+              _isSearchingMessages = !_isSearchingMessages;
+              if (!_isSearchingMessages) {
+                _messageSearchQuery = '';
+              }
+            });
+          },
+        ),
+        if (conversationsBloc != null && !_isSearchingMessages)
           BlocBuilder<ConversationsBloc, ConversationsState>(
             bloc: conversationsBloc,
             builder: (context, convState) {
@@ -665,13 +712,20 @@ class _DirectMessageViewState extends State<_DirectMessageView>
               .where((m) => !(m.deletedForMe.contains(widget.myId) && !m.deletedForAll))
               .toList();
 
-          if (messages.isEmpty && !state.isOtherTyping) {
+          final filteredMessages = _messageSearchQuery.isEmpty
+              ? messages
+              : messages
+                  .where((m) =>
+                      m.text.toLowerCase().contains(_messageSearchQuery.toLowerCase()))
+                  .toList();
+
+          if (filteredMessages.isEmpty && !state.isOtherTyping) {
             return _buildEmptyState(isDark, theme);
           }
 
           final topLoaderCount = state.isLoadingMore ? 1 : 0;
           final typingCount = state.isOtherTyping ? 1 : 0;
-          final totalCount = topLoaderCount + messages.length + typingCount;
+          final totalCount = topLoaderCount + filteredMessages.length + typingCount;
 
           return ListView.builder(
             controller: _scrollCtrl,
@@ -692,15 +746,15 @@ class _DirectMessageViewState extends State<_DirectMessageView>
               }
 
               final messageIndex = i - topLoaderCount;
-              final isTypingRow = state.isOtherTyping && messageIndex == messages.length;
+              final isTypingRow = state.isOtherTyping && messageIndex == filteredMessages.length;
               if (isTypingRow) {
                 return const TypingIndicator();
               }
 
-              final msg = messages[messageIndex];
+              final msg = filteredMessages[messageIndex];
               final isMe = msg.senderId == widget.myId;
               final showDate = messageIndex == 0 ||
-                  _formatDate(messages[messageIndex - 1].createdAt) !=
+                  _formatDate(filteredMessages[messageIndex - 1].createdAt) !=
                       _formatDate(msg.createdAt);
 
               return Column(
@@ -713,8 +767,8 @@ class _DirectMessageViewState extends State<_DirectMessageView>
                     enableReactions: true,
                     compact: true,
                     showAvatar: !isMe &&
-                        (messageIndex == messages.length - 1 ||
-                            messages[messageIndex + 1].senderId != msg.senderId),
+                        (messageIndex == filteredMessages.length - 1 ||
+                            filteredMessages[messageIndex + 1].senderId != msg.senderId),
                     otherUserName: widget.otherUserName,
                     otherUserAvatar: widget.otherUserAvatar,
                     isSelected: _selectedMessageId == msg.id,
@@ -1107,14 +1161,16 @@ class _DirectMessageViewState extends State<_DirectMessageView>
           );
 
           final showMicHold = !hasText && (!_isRecordingVoice || !_isVoiceLocked);
+          final isRtl = Directionality.of(context) == TextDirection.rtl;
 
           return Stack(
-            alignment: Alignment.centerLeft,
+            alignment: isRtl ? Alignment.centerRight : Alignment.centerLeft,
             children: [
               if (_isRecordingVoice) recorder else baseRow,
               if (showMicHold)
                 Positioned(
-                  right: 0,
+                  right: isRtl ? null : 0,
+                  left: isRtl ? 0 : null,
                   bottom: 0,
                   child: GestureDetector(
                     onLongPressStart: (_) {
@@ -1217,11 +1273,8 @@ class _DirectMessageViewState extends State<_DirectMessageView>
         _messagesBloc.add(const MessageReplySet(null));
       }
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to send image: $e')),
-        );
-      }
+      debugPrint('Error sending image: $e');
+      _showSnack('فشل إرسال الصورة. يرجى التحقق من الاتصال بالإنترنت والمحاولة مجدداً.');
     }
   }
 

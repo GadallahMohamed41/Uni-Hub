@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../domain/entities/group_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_entity.dart';
 
 /// Firestore-aware model that maps to/from [GroupEntity].
 class GroupModel {

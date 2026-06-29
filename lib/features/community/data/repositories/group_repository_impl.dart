@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
-import '../../domain/entities/group_entity.dart';
-import '../../domain/entities/group_member_entity.dart';
-import '../../domain/entities/group_message_entity.dart';
-import '../../domain/repositories/group_repository.dart';
-import '../models/group_member_model.dart';
-import '../models/group_message_model.dart';
-import '../models/group_model.dart';
+import 'package:project_test2/features/community/domain/entities/group_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_member_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_message_entity.dart';
+import 'package:project_test2/features/community/domain/repositories/group_repository.dart';
+import 'package:project_test2/features/community/data/models/group_member_model.dart';
+import 'package:project_test2/features/community/data/models/group_message_model.dart';
+import 'package:project_test2/features/community/data/models/group_model.dart';
 
 class GroupRepositoryImpl implements GroupRepository {
   GroupRepositoryImpl({FirebaseFirestore? firestore})

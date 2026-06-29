@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../domain/entities/group_join_request_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_join_request_entity.dart';
 
 class GroupJoinRequestModel {
   final String requestId;

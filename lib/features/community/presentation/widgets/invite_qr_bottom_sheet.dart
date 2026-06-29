@@ -4,10 +4,10 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../bloc/group_invite/group_invite_cubit.dart';
-import '../bloc/group_invite/group_invite_state.dart';
-import '../../data/repositories/group_invite_repository_impl.dart';
-import '../../domain/entities/group_entity.dart';
+import 'package:project_test2/features/community/presentation/bloc/group_invite/group_invite_cubit.dart';
+import 'package:project_test2/features/community/presentation/bloc/group_invite/group_invite_state.dart';
+import 'package:project_test2/features/community/data/repositories/group_invite_repository_impl.dart';
+import 'package:project_test2/features/community/domain/entities/group_entity.dart';
 
 /// A premium, theme-aware QR code bottom sheet.
 /// Shows only Copy Link and Join Group actions.

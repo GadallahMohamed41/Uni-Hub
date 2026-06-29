@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../domain/entities/community_entity.dart';
-import '../../domain/entities/community_member_entity.dart';
+import 'package:project_test2/features/community/domain/entities/community_entity.dart';
+import 'package:project_test2/features/community/domain/entities/community_member_entity.dart';
 
 /// Firestore model for communities/{communityId}/members/{userId}.
 class CommunityMemberModel {

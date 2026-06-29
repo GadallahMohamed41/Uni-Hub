@@ -1,4 +1,4 @@
-import '../entities/group_join_request_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_join_request_entity.dart';
 
 abstract class GroupJoinRequestRepository {
   /// Submit a request to join a private group.

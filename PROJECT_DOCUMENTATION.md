@@ -174,6 +174,9 @@ firebase deploy --only functions
   - New connection-related events simply create documents with `type: "connection_request"` or `type: "request_accepted"`, which automatically:
     - Trigger the existing Cloud Function `pushOnNotificationCreated`.
     - Show in-app notifications via `PushNotificationsService`.
+  - **Post Approval/Rejection Notification Routing**:
+    - When a pending post is approved or rejected by an Admin, the status notification (`post_approved` or `post_rejected`) is explicitly routed to the Post Owner/Creator (`toUserId` set to `ownerId`, and `fromUserId` set to `adminId`).
+    - Stale or duplicate `post_pending` notifications are automatically deleted from Firestore during status updates and background cleanup checks to ensure Admin notification screens are kept clean and no status notifications are mistakenly sent to the Admin who processed the action.
 
 ---
 

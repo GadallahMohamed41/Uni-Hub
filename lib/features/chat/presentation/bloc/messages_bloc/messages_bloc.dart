@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/entities/message_entity.dart';
-import '../../../domain/repositories/chat_repository.dart';
-import 'messages_event.dart';
-import 'messages_state.dart';
+import 'package:project_test2/features/chat/domain/entities/message_entity.dart';
+import 'package:project_test2/features/chat/domain/repositories/chat_repository.dart';
+import 'package:project_test2/features/chat/presentation/bloc/messages_bloc/messages_event.dart';
+import 'package:project_test2/features/chat/presentation/bloc/messages_bloc/messages_state.dart';
 
 // ── Internal events (defined here to avoid cross-file private-class issues) ───
 

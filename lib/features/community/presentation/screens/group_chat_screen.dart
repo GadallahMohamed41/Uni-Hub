@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:intl/intl.dart';
-import '../../../../core/theme.dart';
-import '../../data/repositories/group_repository_impl.dart';
-import '../../domain/entities/group_message_entity.dart';
-import '../bloc/group_chat/group_chat_bloc.dart';
-import '../bloc/group_chat/group_chat_event.dart';
-import '../bloc/group_chat/group_chat_state.dart';
-import '../bloc/groups_list/groups_list_bloc.dart';
-import '../bloc/groups_list/groups_list_event.dart';
-import '../../../../features/chat/presentation/widgets/mute_bottom_sheet.dart';
-import '../widgets/group_avatar.dart';
-import '../widgets/group_message_bubble.dart';
-import '../widgets/group_typing_indicator.dart';
-import '../widgets/pinned_message_banner.dart';
-import 'group_info_screen.dart';
-import 'group_search_screen.dart';
-import 'message_info_screen.dart';
+import 'package:intl/intl.dart' hide TextDirection;
+import 'package:project_test2/core/theme/theme.dart';
+import 'package:project_test2/features/community/data/repositories/group_repository_impl.dart';
+import 'package:project_test2/features/community/domain/entities/group_message_entity.dart';
+import 'package:project_test2/features/community/presentation/bloc/group_chat/group_chat_bloc.dart';
+import 'package:project_test2/features/community/presentation/bloc/group_chat/group_chat_event.dart';
+import 'package:project_test2/features/community/presentation/bloc/group_chat/group_chat_state.dart';
+import 'package:project_test2/features/community/presentation/bloc/groups_list/groups_list_bloc.dart';
+import 'package:project_test2/features/community/presentation/bloc/groups_list/groups_list_event.dart';
+import 'package:project_test2/features/chat/presentation/widgets/mute_bottom_sheet.dart';
+import 'package:project_test2/features/community/presentation/widgets/group_avatar.dart';
+import 'package:project_test2/features/community/presentation/widgets/group_message_bubble.dart';
+import 'package:project_test2/features/community/presentation/widgets/group_typing_indicator.dart';
+import 'package:project_test2/features/community/presentation/widgets/pinned_message_banner.dart';
+import 'package:project_test2/features/community/presentation/screens/group_info_screen.dart';
+import 'package:project_test2/features/community/presentation/screens/group_search_screen.dart';
+import 'package:project_test2/features/community/presentation/screens/message_info_screen.dart';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../services/storage_service.dart';
-import '../../../chat/presentation/widgets/voice_recorder_bar.dart';
-import '../../domain/entities/group_member_entity.dart';
+import 'package:project_test2/core/services/storage_service.dart';
+import 'package:project_test2/features/chat/presentation/widgets/voice_recorder_bar.dart';
+import 'package:project_test2/features/community/domain/entities/group_member_entity.dart';
 
 
 class GroupChatScreen extends StatefulWidget {
@@ -723,7 +723,7 @@ class _InputBar extends StatefulWidget {
   State<_InputBar> createState() => _InputBarState();
 }
 
-class _InputBarState extends State<_InputBar> {
+class _InputBarState extends State<_InputBar> with WidgetsBindingObserver {
   // ── Functional state ──────────────────────────────────────────────────────
   bool _isRecordingVoice = false;
   bool _isVoiceLocked = false;
@@ -747,6 +747,7 @@ class _InputBarState extends State<_InputBar> {
   void initState() {
     super.initState();
     _focusNode.addListener(_onFocusChange);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   void _onFocusChange() {
@@ -756,7 +757,20 @@ class _InputBarState extends State<_InputBar> {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
+      if (_isRecordingVoice && !_isVoiceLocked) {
+        setState(() {
+          _isVoiceLocked = true;
+        });
+      }
+      _voiceRecorderKey.currentState?.handleInterruption();
+    }
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _focusNode.removeListener(_onFocusChange);
     _focusNode.dispose();
     super.dispose();
@@ -1119,8 +1133,10 @@ class _InputBarState extends State<_InputBar> {
                   ),
                 );
 
+                final isRtl = Directionality.of(context) == TextDirection.rtl;
+
                 return Stack(
-                  alignment: Alignment.bottomRight,
+                  alignment: isRtl ? Alignment.bottomLeft : Alignment.bottomRight,
                   children: [
                     row,
                     if (_isRecordingVoice)
@@ -1146,7 +1162,8 @@ class _InputBarState extends State<_InputBar> {
                       ),
                     if (showMicHold)
                       Positioned(
-                        right: 0,
+                        right: isRtl ? null : 0,
+                        left: isRtl ? 0 : null,
                         bottom: 0,
                         child: _BreathingMicButton(
                           voiceRecorderKey: _voiceRecorderKey,

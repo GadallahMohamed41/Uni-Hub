@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import '../../domain/entities/community_entity.dart';
-import '../../../../core/theme.dart';
+import 'package:project_test2/features/community/domain/entities/community_entity.dart';
+import 'package:project_test2/core/theme/theme.dart';
 
 /// Premium WhatsApp-style Community list tile.
 class CommunityTile extends StatelessWidget {

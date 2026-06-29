@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme.dart';
-import '../../domain/entities/group_message_entity.dart';
+import 'package:project_test2/core/theme/theme.dart';
+import 'package:project_test2/features/community/domain/entities/group_message_entity.dart';
 
 class PinnedMessageBanner extends StatelessWidget {
   final GroupMessageEntity message;

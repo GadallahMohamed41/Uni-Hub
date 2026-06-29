@@ -2,12 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import '../../../../core/theme.dart';
-import '../../domain/entities/message_entity.dart';
-import '../../../../features/community/presentation/widgets/reactions_bar.dart';
-import 'voice_message_player.dart';
-import 'reactions_bottom_sheet.dart';
-import '../../../../features/profile/user_profile_screen.dart';
+import 'package:project_test2/core/theme/theme.dart';
+import 'package:project_test2/features/chat/domain/entities/message_entity.dart';
+import 'package:project_test2/features/community/presentation/widgets/reactions_bar.dart';
+import 'package:project_test2/features/chat/presentation/widgets/voice_message_player.dart';
+import 'package:project_test2/features/chat/presentation/widgets/reactions_bottom_sheet.dart';
+import 'package:project_test2/features/profile/presentation/screens/user_profile_screen.dart';
 
 class MessageBubble extends StatelessWidget {
   final MessageEntity message;
@@ -545,6 +545,7 @@ class _MediaContent extends StatelessWidget {
                 imageUrl: url,
                 fit: BoxFit.cover,
                 width: 240,
+                memCacheWidth: 480,
                 placeholder: (_, __) => Container(
                   width: 240,
                   height: 160,

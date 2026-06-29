@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
-import '../../domain/entities/community_entity.dart';
-import '../../domain/entities/community_member_entity.dart';
-import '../../domain/entities/join_request_entity.dart';
-import '../../domain/entities/group_entity.dart';
-import '../../domain/repositories/community_repository.dart';
-import '../models/community_model.dart';
-import '../models/community_member_model.dart';
-import '../models/join_request_model.dart';
-import '../models/group_model.dart';
+import 'package:project_test2/features/community/domain/entities/community_entity.dart';
+import 'package:project_test2/features/community/domain/entities/community_member_entity.dart';
+import 'package:project_test2/features/community/domain/entities/join_request_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_entity.dart';
+import 'package:project_test2/features/community/domain/repositories/community_repository.dart';
+import 'package:project_test2/features/community/data/models/community_model.dart';
+import 'package:project_test2/features/community/data/models/community_member_model.dart';
+import 'package:project_test2/features/community/data/models/join_request_model.dart';
+import 'package:project_test2/features/community/data/models/group_model.dart';
 
 class CommunityRepositoryImpl implements CommunityRepository {
   CommunityRepositoryImpl({FirebaseFirestore? firestore})

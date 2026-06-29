@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'community_entity.dart';
+import 'package:project_test2/features/community/domain/entities/community_entity.dart';
 
 /// Represents a single member entry in the communities/{id}/members subcollection.
 class CommunityMemberEntity extends Equatable {

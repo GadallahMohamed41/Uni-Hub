@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../domain/repositories/group_join_request_repository.dart';
-import '../../../domain/repositories/group_invite_repository.dart';
-import '../../../domain/repositories/group_repository.dart';
-import '../../../domain/entities/group_invite_entity.dart';
-import '../../../domain/entities/group_join_request_entity.dart';
-import 'group_join_request_event.dart';
-import 'group_join_request_state.dart';
+import 'package:project_test2/features/community/domain/repositories/group_join_request_repository.dart';
+import 'package:project_test2/features/community/domain/repositories/group_invite_repository.dart';
+import 'package:project_test2/features/community/domain/repositories/group_repository.dart';
+import 'package:project_test2/features/community/domain/entities/group_invite_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_join_request_entity.dart';
+import 'package:project_test2/features/community/presentation/bloc/group_join_request/group_join_request_event.dart';
+import 'package:project_test2/features/community/presentation/bloc/group_join_request/group_join_request_state.dart';
 
 class GroupJoinRequestBloc extends Bloc<GroupJoinRequestEvent, GroupJoinRequestState> {
   final GroupJoinRequestRepository _joinRequestRepository;

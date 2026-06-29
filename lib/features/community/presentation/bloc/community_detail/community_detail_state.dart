@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-import '../../../domain/entities/community_entity.dart';
-import '../../../domain/entities/community_member_entity.dart';
-import '../../../domain/entities/join_request_entity.dart';
-import '../../../domain/entities/group_entity.dart';
+import 'package:project_test2/features/community/domain/entities/community_entity.dart';
+import 'package:project_test2/features/community/domain/entities/community_member_entity.dart';
+import 'package:project_test2/features/community/domain/entities/join_request_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_entity.dart';
 
 abstract class CommunityDetailState extends Equatable {
   const CommunityDetailState();

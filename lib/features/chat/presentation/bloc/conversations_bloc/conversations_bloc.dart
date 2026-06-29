@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/entities/conversation_entity.dart';
-import '../../../domain/repositories/chat_repository.dart';
-import 'conversations_event.dart';
-import 'conversations_state.dart';
+import 'package:project_test2/features/chat/domain/entities/conversation_entity.dart';
+import 'package:project_test2/features/chat/domain/repositories/chat_repository.dart';
+import 'package:project_test2/features/chat/presentation/bloc/conversations_bloc/conversations_event.dart';
+import 'package:project_test2/features/chat/presentation/bloc/conversations_bloc/conversations_state.dart';
 
 // ── Internal event (defined here to avoid cross-file private-class issues) ────
 class _ConversationsUpdated extends ConversationsEvent {

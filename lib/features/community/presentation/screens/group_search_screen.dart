@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../../../core/theme.dart';
-import '../../data/repositories/group_repository_impl.dart';
-import '../../domain/entities/group_entity.dart';
-import '../../domain/entities/group_message_entity.dart';
-import '../widgets/group_message_bubble.dart';
+import 'package:project_test2/core/theme/theme.dart';
+import 'package:project_test2/features/community/data/repositories/group_repository_impl.dart';
+import 'package:project_test2/features/community/domain/entities/group_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_message_entity.dart';
+import 'package:project_test2/features/community/presentation/widgets/group_message_bubble.dart';
 
 class GroupSearchScreen extends StatefulWidget {
   final GroupEntity group;

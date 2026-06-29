@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/group_entity.dart';
-import '../../../../core/theme.dart';
+import 'package:project_test2/features/community/domain/entities/group_entity.dart';
+import 'package:project_test2/core/theme/theme.dart';
 
 /// Pinned announcement banner shown at the top of the community detail screen.
 /// Tapping it opens the announcement group chat.

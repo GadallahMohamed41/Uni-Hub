@@ -2,13 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import '../../../../core/theme.dart';
-import '../../domain/entities/group_message_entity.dart';
-import 'reactions_bar.dart';
-import '../../../chat/presentation/widgets/voice_message_player.dart';
-import '../../../chat/presentation/widgets/reactions_bottom_sheet.dart';
-import '../../../../features/profile/user_profile_screen.dart';
-import '../../domain/entities/group_member_entity.dart';
+import 'package:project_test2/core/theme/theme.dart';
+import 'package:project_test2/features/community/domain/entities/group_message_entity.dart';
+import 'package:project_test2/features/community/presentation/widgets/reactions_bar.dart';
+import 'package:project_test2/features/chat/presentation/widgets/voice_message_player.dart';
+import 'package:project_test2/features/chat/presentation/widgets/reactions_bottom_sheet.dart';
+import 'package:project_test2/features/profile/presentation/screens/user_profile_screen.dart';
+import 'package:project_test2/features/community/domain/entities/group_member_entity.dart';
 
 /// Full WhatsApp-style message bubble for group chat.
 class GroupMessageBubble extends StatelessWidget {
@@ -521,6 +521,7 @@ class _MediaContent extends StatelessWidget {
                 imageUrl: url,
                 fit: BoxFit.cover,
                 width: 240,
+                memCacheWidth: 480,
                 placeholder: (_, __) => Container(
                   width: 240,
                   height: 160,

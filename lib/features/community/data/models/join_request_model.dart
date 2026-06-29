@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../domain/entities/join_request_entity.dart';
+import 'package:project_test2/features/community/domain/entities/join_request_entity.dart';
 
 /// Firestore model for communities/{communityId}/joinRequests/{requestId}.
 class JoinRequestModel {

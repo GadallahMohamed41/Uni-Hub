@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import '../../../domain/entities/group_join_request_entity.dart';
-import '../../../domain/entities/group_invite_entity.dart';
-import '../../../domain/entities/group_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_join_request_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_invite_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_entity.dart';
 
 abstract class GroupJoinRequestState extends Equatable {
   const GroupJoinRequestState();

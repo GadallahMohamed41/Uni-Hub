@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../../domain/entities/group_invite_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_invite_entity.dart';
 
 abstract class GroupInviteState extends Equatable {
   const GroupInviteState();

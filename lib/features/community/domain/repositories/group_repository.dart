@@ -1,6 +1,6 @@
-import '../entities/group_entity.dart';
-import '../entities/group_member_entity.dart';
-import '../entities/group_message_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_member_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_message_entity.dart';
 
 /// Abstract repository contract for all Group operations.
 /// Implementations live in the data layer.

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme.dart';
+import 'package:project_test2/core/theme/theme.dart';
 
 /// Animated three-dot typing indicator (WhatsApp-style).
 class TypingIndicator extends StatefulWidget {

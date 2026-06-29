@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/theme.dart';
+import 'package:project_test2/core/theme/theme.dart';
 
 /// Group avatar with gradient fallback showing first letter.
 class GroupAvatar extends StatelessWidget {

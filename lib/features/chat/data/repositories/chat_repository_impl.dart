@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../domain/entities/conversation_entity.dart';
-import '../../domain/entities/message_entity.dart';
-import '../../domain/repositories/chat_repository.dart';
-import '../models/conversation_model.dart';
-import '../models/message_model.dart';
+import 'package:project_test2/features/chat/domain/entities/conversation_entity.dart';
+import 'package:project_test2/features/chat/domain/entities/message_entity.dart';
+import 'package:project_test2/features/chat/domain/repositories/chat_repository.dart';
+import 'package:project_test2/features/chat/data/models/conversation_model.dart';
+import 'package:project_test2/features/chat/data/models/message_model.dart';
 
 class ChatRepositoryImpl implements ChatRepository {
   ChatRepositoryImpl({FirebaseFirestore? firestore})

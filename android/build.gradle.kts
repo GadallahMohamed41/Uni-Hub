@@ -2,9 +2,26 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()  // ✅ تم إضافة JCenter لحل مشكلة android-jsc
+        // Flutter IO repository
         maven {
             url = uri("https://storage.googleapis.com/download.flutter.io")
+        }
+        // Maven Central explicit HTTPS mirror
+        maven {
+            url = uri("https://repo1.maven.org/maven2/")
+        }
+        // JCenter (fallback for older packages like android-jsc)
+        maven {
+            url = uri("https://jcenter.bintray.com")
+        }
+    }
+
+    // Force all subprojects to use HTTPS for Maven resolution
+    configurations.all {
+        resolutionStrategy {
+            // Retry on failure
+            cacheDynamicVersionsFor(5, "minutes")
+            cacheChangingModulesFor(0, "seconds")
         }
     }
 }

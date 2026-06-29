@@ -8,18 +8,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
-import 'package:project_test2/core/theme.dart';
-import 'features/splash/splash_screen.dart';
-import 'providers/auth_provider.dart';
-import 'providers/posts_provider.dart';
-import 'providers/theme_provider.dart';
-import 'providers/locale_provider.dart';
-import 'repositories/theme_repository.dart';
+import 'package:project_test2/core/theme/theme.dart';
+import 'package:project_test2/features/splash/presentation/screens/splash_screen.dart';
+import 'package:project_test2/features/auth/presentation/providers/auth_provider.dart';
+import 'package:project_test2/features/home/presentation/providers/posts_provider.dart';
+import 'package:project_test2/core/theme/theme_provider.dart';
+import 'package:project_test2/core/providers/locale_provider.dart';
+import 'package:project_test2/core/theme/theme_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'firebase_options.dart';
-import 'config/supabase_config.dart';
-import 'services/push_notifications_service.dart';
-import 'services/deep_link_service.dart';
+import 'package:project_test2/firebase_options.dart';
+import 'package:project_test2/core/config/supabase_config.dart';
+import 'package:project_test2/core/services/push_notifications_service.dart';
+import 'package:project_test2/core/services/deep_link_service.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -76,12 +76,18 @@ class _AppBootstrapperState extends State<AppBootstrapper> {
         options: DefaultFirebaseOptions.currentPlatform,
       );
 
-      // 2. Initialize Firebase App Check (Play Integrity on Android, App Attest on iOS)
       try {
-        await FirebaseAppCheck.instance.activate(
-          providerAndroid: AndroidPlayIntegrityProvider(),
-          providerApple: AppleAppAttestProvider(),
-        );
+        if (kDebugMode) {
+          await FirebaseAppCheck.instance.activate(
+            providerAndroid: AndroidDebugProvider(),
+            providerApple: AppleDebugProvider(),
+          );
+        } else {
+          await FirebaseAppCheck.instance.activate(
+            providerAndroid: AndroidPlayIntegrityProvider(),
+            providerApple: AppleAppAttestProvider(),
+          );
+        }
         debugPrint('[AppCheck] Activated successfully');
       } catch (e) {
         debugPrint('[AppCheck] Activation failed: $e');

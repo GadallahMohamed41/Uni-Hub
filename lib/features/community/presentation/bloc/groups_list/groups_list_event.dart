@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../../domain/entities/group_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_entity.dart';
 
 abstract class GroupsListEvent extends Equatable {
   const GroupsListEvent();

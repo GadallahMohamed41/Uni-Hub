@@ -1,5 +1,5 @@
-import '../entities/conversation_entity.dart';
-import '../entities/message_entity.dart';
+import 'package:project_test2/features/chat/domain/entities/conversation_entity.dart';
+import 'package:project_test2/features/chat/domain/entities/message_entity.dart';
 
 /// Abstract repository interface — the Domain layer contract.
 /// The Data layer provides the concrete implementation.

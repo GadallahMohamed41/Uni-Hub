@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../domain/entities/group_message_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_message_entity.dart';
 
 /// Firestore model for a group message document.
 /// Stored at: groups/{groupId}/messages/{messageId}

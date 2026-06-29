@@ -13,17 +13,19 @@ service firebase.storage {
     // PDF Certificates (Strict validation: PDF only, max 10MB)
     match /users/{userId}/certificates/{fileName} {
       allow read: if signedIn() && (isOwner(userId) || request.auth.token.role == 'admin');
-      allow write: if isOwner(userId)
+      allow create, update: if isOwner(userId)
         && request.resource.size < 10 * 1024 * 1024
         && request.resource.contentType == 'application/pdf';
+      allow delete: if isOwner(userId);
     }
 
     // Post media, community feeds, cover photos, etc.
     match /media/{userId}/{fileName} {
       allow read: if signedIn();
-      allow write: if isOwner(userId)
+      allow create, update: if isOwner(userId)
         && request.resource.size < 50 * 1024 * 1024 // Max 50MB
         && request.resource.contentType.matches('image/.*|video/.*|audio/.*');
+      allow delete: if isOwner(userId);
     }
   }
 }

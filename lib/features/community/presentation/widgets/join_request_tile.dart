@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../domain/entities/join_request_entity.dart';
-import '../../../../core/theme.dart';
+import 'package:project_test2/features/community/domain/entities/join_request_entity.dart';
+import 'package:project_test2/core/theme/theme.dart';
 
 /// Tile for a single join request shown in the Admin Panel.
 class JoinRequestTile extends StatelessWidget {

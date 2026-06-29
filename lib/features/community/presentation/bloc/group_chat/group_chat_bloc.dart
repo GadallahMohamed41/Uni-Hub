@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../domain/entities/group_entity.dart';
-import '../../../domain/repositories/group_repository.dart';
-import 'group_chat_event.dart';
-import 'group_chat_state.dart';
+import 'package:project_test2/features/community/domain/entities/group_entity.dart';
+import 'package:project_test2/features/community/domain/repositories/group_repository.dart';
+import 'package:project_test2/features/community/presentation/bloc/group_chat/group_chat_event.dart';
+import 'package:project_test2/features/community/presentation/bloc/group_chat/group_chat_state.dart';
 
 class GroupChatBloc extends Bloc<GroupChatEvent, GroupChatState> {
   GroupChatBloc({

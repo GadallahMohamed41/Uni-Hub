@@ -1,7 +1,7 @@
-import '../entities/community_entity.dart';
-import '../entities/community_member_entity.dart';
-import '../entities/join_request_entity.dart';
-import '../entities/group_entity.dart';
+import 'package:project_test2/features/community/domain/entities/community_entity.dart';
+import 'package:project_test2/features/community/domain/entities/community_member_entity.dart';
+import 'package:project_test2/features/community/domain/entities/join_request_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_entity.dart';
 
 /// Abstract contract for all Community operations.
 /// Implementations live in the data layer.

@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../../../core/theme.dart';
-import '../../domain/entities/group_member_entity.dart';
-import '../../domain/entities/group_message_entity.dart';
+import 'package:project_test2/core/theme/theme.dart';
+import 'package:project_test2/features/community/domain/entities/group_member_entity.dart';
+import 'package:project_test2/features/community/domain/entities/group_message_entity.dart';
 
 /// WhatsApp-style Message Info screen.
 /// Shows who received (delivered) and who read (seen) the message.

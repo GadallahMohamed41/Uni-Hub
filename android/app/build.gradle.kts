@@ -87,6 +87,4 @@ dependencies {
     implementation("androidx.webkit:webkit:1.11.0")
     implementation("androidx.browser:browser:1.7.0")
     
-    // ✅ استخدام أحدث إصدار متوفر من JSC
-    implementation("org.webkit:android-jsc:+")
 }

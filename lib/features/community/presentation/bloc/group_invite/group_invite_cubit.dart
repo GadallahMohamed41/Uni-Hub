@@ -1,14 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gal/gal.dart';
-import 'package:project_test2/core/app_config.dart';
+import 'package:project_test2/core/config/app_config.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../../domain/entities/group_invite_entity.dart';
-import '../../../domain/repositories/group_invite_repository.dart';
-import 'group_invite_state.dart';
+import 'package:project_test2/features/community/domain/entities/group_invite_entity.dart';
+import 'package:project_test2/features/community/domain/repositories/group_invite_repository.dart';
+import 'package:project_test2/features/community/presentation/bloc/group_invite/group_invite_state.dart';
 
 class GroupInviteCubit extends Cubit<GroupInviteState> {
   final GroupInviteRepository _repository;

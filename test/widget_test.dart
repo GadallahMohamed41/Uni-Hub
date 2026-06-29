@@ -9,7 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:project_test2/main.dart';
+<<<<<<< HEAD
 import 'package:project_test2/core/theme/theme_repository.dart';
+=======
+import 'package:project_test2/repositories/theme_repository.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {

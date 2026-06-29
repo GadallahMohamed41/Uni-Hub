@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+<<<<<<< HEAD
 import 'package:project_test2/features/community/domain/entities/group_invite_entity.dart';
+=======
+import '../../domain/entities/group_invite_entity.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class GroupInviteModel {
   final String inviteToken;

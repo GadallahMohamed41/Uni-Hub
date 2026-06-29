@@ -1,8 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:project_test2/core/theme/theme.dart';
 import 'package:project_test2/features/community/data/repositories/group_repository_impl.dart';
 import 'package:project_test2/features/community/domain/entities/group_message_entity.dart';
+=======
+import '../../../../core/theme.dart';
+import '../../data/repositories/group_repository_impl.dart';
+import '../../domain/entities/group_message_entity.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class GroupMediaScreen extends StatefulWidget {
   final String groupId;

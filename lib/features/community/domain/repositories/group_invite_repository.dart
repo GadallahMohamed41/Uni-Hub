@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import 'package:project_test2/features/community/domain/entities/group_invite_entity.dart';
+=======
+import '../entities/group_invite_entity.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 abstract class GroupInviteRepository {
   /// Create a new group invite token.

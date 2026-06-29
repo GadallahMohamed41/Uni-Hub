@@ -2,6 +2,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+<<<<<<< HEAD
         // Flutter IO repository
         maven {
             url = uri("https://storage.googleapis.com/download.flutter.io")
@@ -23,6 +24,12 @@ allprojects {
             cacheDynamicVersionsFor(5, "minutes")
             cacheChangingModulesFor(0, "seconds")
         }
+=======
+        jcenter()  // ✅ تم إضافة JCenter لحل مشكلة android-jsc
+        maven {
+            url = uri("https://storage.googleapis.com/download.flutter.io")
+        }
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
     }
 }
 

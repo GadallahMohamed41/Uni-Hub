@@ -3,11 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+<<<<<<< HEAD
 import 'package:project_test2/core/theme/theme.dart';
 import 'package:project_test2/core/services/storage_service.dart';
 import 'package:project_test2/features/community/presentation/bloc/community_list/community_list_bloc.dart';
 import 'package:project_test2/features/community/presentation/bloc/community_list/community_list_event.dart';
 import 'package:project_test2/features/community/presentation/bloc/community_list/community_list_state.dart';
+=======
+import '../../../../../core/theme.dart';
+import '../../../../services/storage_service.dart';
+import '../bloc/community_list/community_list_bloc.dart';
+import '../bloc/community_list/community_list_event.dart';
+import '../bloc/community_list/community_list_state.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class CreateCommunityScreen extends StatefulWidget {
   final String currentUserId;

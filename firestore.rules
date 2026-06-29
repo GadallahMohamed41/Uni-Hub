@@ -62,6 +62,7 @@ service cloud.firestore {
         allow write: if isOwner(userId) || isAdmin();
       }
 
+<<<<<<< HEAD
       // Connections: Owner can manage their own connections.
       // Also allow the connected user to create/delete entries (needed during accept flow
       // where user A must write to user B's /connections subcollection and vice versa).
@@ -69,6 +70,12 @@ service cloud.firestore {
         allow read: if signedIn() && (isOwner(userId) || isOwner(connectedUserId) || isAdmin());
         // Owner manages their list, OR the connected user creates/removes the symmetric entry
         allow write: if signedIn() && (isOwner(userId) || isOwner(connectedUserId) || isAdmin());
+=======
+      // Connections: Only the owner (the parent user) can modify their connection entries
+      match /connections/{connectedUserId} {
+        allow read: if signedIn() && (isOwner(userId) || isOwner(connectedUserId) || isAdmin());
+        allow write: if isOwner(userId) || isAdmin();
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
       }
 
       // Incoming connection requests: Sender writes, recipient approves (deletes)
@@ -162,14 +169,22 @@ service cloud.firestore {
         request.resource.data.fromUserId == request.auth.uid &&
         request.resource.data.read == false;
 
+<<<<<<< HEAD
       // Allow recipient to mark it read, and allow original sender to update/resend
+=======
+      // Allow recipient to mark it read, but prevent modification of other fields
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
       allow update: if signedIn() && (
         isAdmin() ||
         (
           resource.data.toUserId == request.auth.uid &&
           request.resource.data.diff(resource.data).changedKeys().hasOnly(['read', 'updatedAt'])
+<<<<<<< HEAD
         ) ||
         resource.data.fromUserId == request.auth.uid
+=======
+        )
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
       );
 
       allow delete: if isAdmin() || resource.data.toUserId == request.auth.uid;

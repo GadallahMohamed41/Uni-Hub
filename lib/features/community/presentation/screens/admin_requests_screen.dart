@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+<<<<<<< HEAD
 import 'package:project_test2/features/community/data/repositories/group_join_request_repository_impl.dart';
 import 'package:project_test2/features/community/data/repositories/group_invite_repository_impl.dart';
 import 'package:project_test2/features/community/data/repositories/group_repository_impl.dart';
@@ -8,6 +9,15 @@ import 'package:project_test2/features/community/domain/entities/group_join_requ
 import 'package:project_test2/features/community/presentation/bloc/group_join_request/group_join_request_bloc.dart';
 import 'package:project_test2/features/community/presentation/bloc/group_join_request/group_join_request_event.dart';
 import 'package:project_test2/features/community/presentation/bloc/group_join_request/group_join_request_state.dart';
+=======
+import '../../data/repositories/group_join_request_repository_impl.dart';
+import '../../data/repositories/group_invite_repository_impl.dart';
+import '../../data/repositories/group_repository_impl.dart';
+import '../../domain/entities/group_join_request_entity.dart';
+import '../bloc/group_join_request/group_join_request_bloc.dart';
+import '../bloc/group_join_request/group_join_request_event.dart';
+import '../bloc/group_join_request/group_join_request_state.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class RequestItem {
   final String id;

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+<<<<<<< HEAD
 import 'package:project_test2/core/theme/theme.dart';
 import 'package:project_test2/core/config/i18n.dart';
 import 'package:project_test2/features/profile/data/models/user_model.dart';
@@ -17,6 +18,21 @@ import 'package:project_test2/features/chat/presentation/bloc/conversations_bloc
 import 'package:project_test2/features/chat/presentation/screens/direct_message_screen.dart';
 import 'package:project_test2/features/chat/presentation/widgets/mute_bottom_sheet.dart';
 import 'package:project_test2/features/chat/presentation/screens/archived_conversations_screen.dart';
+=======
+import '../../../../core/theme.dart';
+import '../../../../core/i18n.dart';
+import '../../../../models/user_model.dart';
+import '../../../../providers/auth_provider.dart';
+import '../../../../services/firestore_service.dart';
+import '../../data/repositories/chat_repository_impl.dart';
+import '../../domain/entities/conversation_entity.dart';
+import '../bloc/conversations_bloc/conversations_bloc.dart';
+import '../bloc/conversations_bloc/conversations_event.dart';
+import '../bloc/conversations_bloc/conversations_state.dart';
+import 'direct_message_screen.dart';
+import '../widgets/mute_bottom_sheet.dart';
+import 'archived_conversations_screen.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class ConversationsScreen extends StatelessWidget {
   const ConversationsScreen({super.key});

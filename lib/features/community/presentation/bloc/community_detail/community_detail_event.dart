@@ -1,7 +1,13 @@
 import 'package:equatable/equatable.dart';
+<<<<<<< HEAD
 import 'package:project_test2/features/community/domain/entities/group_entity.dart';
 import 'package:project_test2/features/community/domain/entities/community_member_entity.dart';
 import 'package:project_test2/features/community/domain/entities/join_request_entity.dart';
+=======
+import '../../../domain/entities/group_entity.dart';
+import '../../../domain/entities/community_member_entity.dart';
+import '../../../domain/entities/join_request_entity.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 abstract class CommunityDetailEvent extends Equatable {
   const CommunityDetailEvent();

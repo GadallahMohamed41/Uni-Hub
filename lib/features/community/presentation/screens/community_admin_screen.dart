@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+<<<<<<< HEAD
 import 'package:project_test2/core/theme/theme.dart';
 import 'package:project_test2/features/community/presentation/bloc/community_detail/community_detail_bloc.dart';
 import 'package:project_test2/features/community/presentation/bloc/community_detail/community_detail_event.dart';
 import 'package:project_test2/features/community/presentation/bloc/community_detail/community_detail_state.dart';
 import 'package:project_test2/features/community/domain/entities/community_entity.dart';
 import 'package:project_test2/features/community/domain/entities/community_member_entity.dart';
+=======
+import '../../../../../core/theme.dart';
+import '../bloc/community_detail/community_detail_bloc.dart';
+import '../bloc/community_detail/community_detail_event.dart';
+import '../bloc/community_detail/community_detail_state.dart';
+import '../../domain/entities/community_entity.dart';
+import '../../domain/entities/community_member_entity.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class CommunityAdminScreen extends StatelessWidget {
   final CommunityEntity community;

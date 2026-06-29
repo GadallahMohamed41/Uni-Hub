@@ -1,10 +1,17 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+<<<<<<< HEAD
 import 'package:project_test2/features/community/domain/entities/group_entity.dart';
 import 'package:project_test2/features/community/domain/repositories/group_repository.dart';
 import 'package:project_test2/features/community/presentation/bloc/groups_list/groups_list_event.dart';
 import 'package:project_test2/features/community/presentation/bloc/groups_list/groups_list_state.dart';
+=======
+import '../../../domain/entities/group_entity.dart';
+import '../../../domain/repositories/group_repository.dart';
+import 'groups_list_event.dart';
+import 'groups_list_state.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class GroupsListBloc extends Bloc<GroupsListEvent, GroupsListState> {
   GroupsListBloc({required GroupRepository repository})

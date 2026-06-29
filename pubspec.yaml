@@ -70,8 +70,12 @@ flutter_launcher_icons:
     image_path: "lib/assets/icons/android/play_store_512.png"
   image_path: lib/assets/icons/android/play_store_512.png
   min_sdk_android: 21
+<<<<<<< HEAD
   adaptive_icon_background: "#051b44"
   adaptive_icon_foreground: "lib/assets/icons/android/play_store_512.png"
+=======
+  adaptive_icon_background: "#FFFFFF"
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 flutter:
   uses-material-design: true

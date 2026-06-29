@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+<<<<<<< HEAD
 import 'package:project_test2/core/theme/theme.dart';
+=======
+import '../../../../core/theme.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class VoiceMessagePlayer extends StatefulWidget {
   final String audioUrl;

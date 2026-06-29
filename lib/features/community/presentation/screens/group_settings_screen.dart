@@ -1,11 +1,19 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+<<<<<<< HEAD
 import 'package:project_test2/core/theme/theme.dart';
 import 'package:project_test2/core/services/storage_service.dart';
 import 'package:project_test2/features/community/data/repositories/group_repository_impl.dart';
 import 'package:project_test2/features/community/domain/entities/group_entity.dart';
 import 'package:project_test2/features/community/presentation/widgets/group_avatar.dart';
+=======
+import '../../../../core/theme.dart';
+import '../../../../services/storage_service.dart';
+import '../../data/repositories/group_repository_impl.dart';
+import '../../domain/entities/group_entity.dart';
+import '../widgets/group_avatar.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class GroupSettingsScreen extends StatefulWidget {
   final GroupEntity group;

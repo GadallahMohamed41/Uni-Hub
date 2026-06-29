@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import 'package:project_test2/features/chat/domain/entities/conversation_entity.dart';
 import 'package:project_test2/features/chat/domain/entities/message_entity.dart';
+=======
+import '../entities/conversation_entity.dart';
+import '../entities/message_entity.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 /// Abstract repository interface — the Domain layer contract.
 /// The Data layer provides the concrete implementation.

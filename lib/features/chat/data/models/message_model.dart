@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+<<<<<<< HEAD
 import 'package:project_test2/features/chat/domain/entities/message_entity.dart';
+=======
+import '../../domain/entities/message_entity.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 /// Firestore-aware data model that maps to/from [MessageEntity].
 class MessageModel {

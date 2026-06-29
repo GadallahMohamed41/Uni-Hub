@@ -1,8 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
+<<<<<<< HEAD
 import 'package:project_test2/features/community/domain/entities/group_invite_entity.dart';
 import 'package:project_test2/features/community/domain/repositories/group_invite_repository.dart';
 import 'package:project_test2/features/community/data/models/group_invite_model.dart';
+=======
+import '../../domain/entities/group_invite_entity.dart';
+import '../../domain/repositories/group_invite_repository.dart';
+import '../models/group_invite_model.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class GroupInviteRepositoryImpl implements GroupInviteRepository {
   final FirebaseFirestore _db;

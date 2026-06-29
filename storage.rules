@@ -13,19 +13,31 @@ service firebase.storage {
     // PDF Certificates (Strict validation: PDF only, max 10MB)
     match /users/{userId}/certificates/{fileName} {
       allow read: if signedIn() && (isOwner(userId) || request.auth.token.role == 'admin');
+<<<<<<< HEAD
       allow create, update: if isOwner(userId)
         && request.resource.size < 10 * 1024 * 1024
         && request.resource.contentType == 'application/pdf';
       allow delete: if isOwner(userId);
+=======
+      allow write: if isOwner(userId)
+        && request.resource.size < 10 * 1024 * 1024
+        && request.resource.contentType == 'application/pdf';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
     }
 
     // Post media, community feeds, cover photos, etc.
     match /media/{userId}/{fileName} {
       allow read: if signedIn();
+<<<<<<< HEAD
       allow create, update: if isOwner(userId)
         && request.resource.size < 50 * 1024 * 1024 // Max 50MB
         && request.resource.contentType.matches('image/.*|video/.*|audio/.*');
       allow delete: if isOwner(userId);
+=======
+      allow write: if isOwner(userId)
+        && request.resource.size < 50 * 1024 * 1024 // Max 50MB
+        && request.resource.contentType.matches('image/.*|video/.*|audio/.*');
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
     }
   }
 }

@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+<<<<<<< HEAD
 import 'package:project_test2/features/auth/presentation/providers/auth_provider.dart';
 import 'package:project_test2/core/theme/theme.dart';
 import 'package:project_test2/features/community/data/repositories/group_invite_repository_impl.dart';
@@ -11,6 +12,16 @@ import 'package:project_test2/features/community/data/repositories/group_reposit
 import 'package:project_test2/features/community/presentation/bloc/group_join_request/group_join_request_bloc.dart';
 import 'package:project_test2/features/community/presentation/bloc/group_join_request/group_join_request_event.dart';
 import 'package:project_test2/features/community/presentation/bloc/group_join_request/group_join_request_state.dart';
+=======
+import '../../../../providers/auth_provider.dart';
+import '../../../../core/theme.dart';
+import '../../data/repositories/group_invite_repository_impl.dart';
+import '../../data/repositories/group_join_request_repository_impl.dart';
+import '../../data/repositories/group_repository_impl.dart';
+import '../bloc/group_join_request/group_join_request_bloc.dart';
+import '../bloc/group_join_request/group_join_request_event.dart';
+import '../bloc/group_join_request/group_join_request_state.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
 const _kPrimary      = Color(0xFF534AB7);

@@ -3,11 +3,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+<<<<<<< HEAD
 import 'package:project_test2/core/theme/theme.dart';
 import 'package:project_test2/features/chat/data/repositories/chat_repository_impl.dart';
 import 'package:project_test2/features/chat/domain/entities/conversation_entity.dart';
 import 'package:project_test2/features/chat/presentation/screens/direct_message_screen.dart';
 import 'package:project_test2/features/chat/presentation/widgets/mute_bottom_sheet.dart';
+=======
+import '../../../../core/theme.dart';
+import '../../data/repositories/chat_repository_impl.dart';
+import '../../domain/entities/conversation_entity.dart';
+import 'direct_message_screen.dart';
+import '../widgets/mute_bottom_sheet.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class ArchivedConversationsScreen extends StatefulWidget {
   final String myId;

@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
+<<<<<<< HEAD
 import 'package:project_test2/features/community/domain/entities/community_entity.dart';
+=======
+import '../../../domain/entities/community_entity.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 abstract class CommunityListEvent extends Equatable {
   const CommunityListEvent();

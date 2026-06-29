@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+<<<<<<< HEAD
 import 'package:project_test2/core/services/deep_link_service.dart';
+=======
+import '../../../../services/deep_link_service.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 /// A premium bottom sheet styled after the system QR scanner "filter_app_links" UX.
 /// Shows group invite details with "Copy link" and "Join group" actions.

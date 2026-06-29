@@ -1,9 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+<<<<<<< HEAD
 import 'package:project_test2/features/community/domain/entities/group_join_request_entity.dart';
 import 'package:project_test2/features/community/domain/repositories/group_join_request_repository.dart';
 import 'package:project_test2/features/community/data/models/group_join_request_model.dart';
+=======
+import '../../domain/entities/group_join_request_entity.dart';
+import '../../domain/repositories/group_join_request_repository.dart';
+import '../models/group_join_request_model.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class GroupJoinRequestRepositoryImpl implements GroupJoinRequestRepository {
   final FirebaseFirestore _db;

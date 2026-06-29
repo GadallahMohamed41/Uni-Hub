@@ -1,4 +1,5 @@
 import 'dart:async';
+<<<<<<< HEAD
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +8,11 @@ import 'package:project_test2/core/theme/theme.dart';
 import 'package:project_test2/core/services/voice_recording_service.dart';
 import 'package:project_test2/core/config/i18n.dart';
 import 'package:record/record.dart';
+=======
+import 'package:flutter/material.dart';
+import '../../../../core/theme.dart';
+import '../../../../services/voice_recording_service.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class VoiceRecorderBar extends StatefulWidget {
   final Future<void> Function(String path, int durationSeconds) onSend;
@@ -27,6 +33,7 @@ class VoiceRecorderBar extends StatefulWidget {
 }
 
 class VoiceRecorderBarState extends State<VoiceRecorderBar>
+<<<<<<< HEAD
     with TickerProviderStateMixin {
   late final VoiceRecordingService _recordingService;
   
@@ -65,11 +72,27 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
   StreamSubscription? _playerPositionSub;
   StreamSubscription? _playerDurationSub;
 
+=======
+    with SingleTickerProviderStateMixin {
+  late final VoiceRecordingService _recordingService;
+  late final AnimationController _pulseController;
+  late final Animation<double> _pulseAnimation;
+
+  bool _isRecording = false;
+  bool _isLocked = false;
+  int _duration = 0;
+
+  // Slide to cancel / Swipe to lock
+  double _dragOffset = 0.0;
+  double _verticalDragOffset = 0.0;
+
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
   @override
   void initState() {
     super.initState();
     _recordingService = VoiceRecordingService();
 
+<<<<<<< HEAD
     // Pulse animation
     _pulseController = AnimationController(
       vsync: this,
@@ -115,10 +138,27 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
         setState(() => _duration = d);
       }
     });
+=======
+    _pulseController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    );
+    _pulseAnimation = Tween<double>(begin: 1.0, end: 1.2).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+    );
+
+    _recordingService.durationStream.listen((d) {
+      if (mounted) setState(() => _duration = d);
+    });
+
+    // Recording is started externally via startRecording() when the user long-presses the mic button.
+    // Do NOT auto-start here.
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
   }
 
   @override
   void dispose() {
+<<<<<<< HEAD
     _amplitudeSub?.cancel();
     _durationSub?.cancel();
     _pulseController.dispose();
@@ -136,12 +176,20 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
     _previewPlayer = null;
   }
 
+=======
+    _pulseController.dispose();
+    _recordingService.dispose();
+    super.dispose();
+  }
+
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
   String _formatDuration(int seconds) {
     final m = seconds ~/ 60;
     final s = seconds % 60;
     return '${m.toString().padLeft(2, '0')}:${s.toString().padLeft(2, '0')}';
   }
 
+<<<<<<< HEAD
   String _formatDurationMs(Duration d) {
     final s = d.inSeconds;
     return _formatDuration(s);
@@ -177,11 +225,29 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
       }
       
       // Vertical lock is always swiping up (dy < 0)
+=======
+  /// Called externally by the parent (via GlobalKey) right after the bar is shown.
+  Future<void> startRecording() => _startRecording();
+
+  Future<void> stopAndSend() => _stopAndSend();
+
+  Future<void> cancelRecording() => _cancelRecording();
+
+  bool get isLocked => _isLocked;
+
+  void handleDragUpdate({required double dx, required double dy}) {
+    if (_isLocked || !_isRecording) return;
+    setState(() {
+      if (dx < 0) {
+        _dragOffset = dx;
+      }
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
       if (dy < 0) {
         _verticalDragOffset = dy;
       }
     });
 
+<<<<<<< HEAD
     // Cancel threshold: 100 pixels
     if (isRtl && _dragOffset > 100) {
       _cancelRecording();
@@ -191,6 +257,11 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
     // Lock threshold: 80 pixels
     else if (_verticalDragOffset < -80) {
       HapticFeedback.mediumImpact();
+=======
+    if (_dragOffset < -100) {
+      _cancelRecording();
+    } else if (_verticalDragOffset < -80) {
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
       setState(() {
         _isLocked = true;
         _dragOffset = 0;
@@ -199,6 +270,7 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
     }
   }
 
+<<<<<<< HEAD
   // --- Recording Actions ---
 
   Future<void> _startRecording() async {
@@ -244,10 +316,29 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
     } catch (e) {
       debugPrint('Failed to start voice recording: $e');
       widget.onCancel();
+=======
+  Future<void> _startRecording() async {
+    try {
+      final hasPerm = await _recordingService.hasPermission();
+      if (!hasPerm) return;
+
+      await _recordingService.startRecording();
+      setState(() {
+        _isRecording = true;
+        _isLocked = false;
+        _dragOffset = 0;
+        _verticalDragOffset = 0;
+      });
+      widget.onStateChanged?.call(true);
+      _pulseController.repeat(reverse: true);
+    } catch (e) {
+      debugPrint('Failed to start recording: $e');
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
     }
   }
 
   Future<void> _stopAndSend() async {
+<<<<<<< HEAD
     if (!_isRecording && _previewPlayer == null) return;
     
     _pulseController.stop();
@@ -263,10 +354,17 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
     } else {
       path = await _recordingService.stopRecording();
     }
+=======
+    if (!_isRecording) return;
+    _pulseController.stop();
+    final path = await _recordingService.stopRecording();
+    final dur = _duration;
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
     setState(() {
       _isRecording = false;
       _isLocked = false;
+<<<<<<< HEAD
       _isPaused = false;
       _dragOffset = 0;
       _verticalDragOffset = 0;
@@ -279,10 +377,20 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
       await widget.onSend(path, dur);
     } else {
       widget.onCancel();
+=======
+      _dragOffset = 0;
+      _verticalDragOffset = 0;
+    });
+    widget.onStateChanged?.call(false);
+
+    if (path != null && dur > 0) {
+      await widget.onSend(path, dur);
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
     }
   }
 
   Future<void> _cancelRecording() async {
+<<<<<<< HEAD
     if (!_isRecording && _previewPlayer == null) return;
     
     _pulseController.stop();
@@ -305,10 +413,20 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
       _isLocked = false;
       _isPaused = false;
       _isDeleting = false;
+=======
+    if (!_isRecording) return;
+    _pulseController.stop();
+    await _recordingService.cancelRecording();
+
+    setState(() {
+      _isRecording = false;
+      _isLocked = false;
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
       _dragOffset = 0;
       _verticalDragOffset = 0;
       _duration = 0;
     });
+<<<<<<< HEAD
 
     _deleteController.reset();
     widget.onStateChanged?.call(false);
@@ -450,16 +568,60 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
     if (_isDeleting) {
       return _buildDeletionBar(isDark, isRtl);
     }
+=======
+    widget.onStateChanged?.call(false);
+
+    widget.onCancel();
+  }
+
+  void _onLongPressMoveUpdate(LongPressMoveUpdateDetails details) {
+    if (_isLocked || !_isRecording) return;
+
+    final dx = details.offsetFromOrigin.dx;
+    final dy = details.offsetFromOrigin.dy;
+
+    setState(() {
+      if (dx < 0) {
+        _dragOffset = dx;
+      }
+      if (dy < 0) {
+        _verticalDragOffset = dy;
+      }
+    });
+
+    // Cancel if slid left significantly
+    if (_dragOffset < -100) {
+      _cancelRecording();
+    }
+    // Lock if swiped up significantly
+    else if (_verticalDragOffset < -80) {
+      setState(() {
+        _isLocked = true;
+        _dragOffset = 0;
+        _verticalDragOffset = 0;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
     return Stack(
       clipBehavior: Clip.none,
       children: [
+<<<<<<< HEAD
         // Background Drawer Container
+=======
+        // Main Input Bar Replacement
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
         Container(
           height: 48,
           decoration: BoxDecoration(
             color: isDark ? const Color(0xFF1E293B) : Colors.white,
             borderRadius: BorderRadius.circular(24),
+<<<<<<< HEAD
             border: Border.all(
               color: isDark 
                   ? Colors.white.withValues(alpha: 0.08) 
@@ -470,11 +632,19 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
                 color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.06),
                 blurRadius: 10,
                 offset: const Offset(0, 3),
+=======
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.05),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
               ),
             ],
           ),
           child: Row(
             children: [
+<<<<<<< HEAD
               const SizedBox(width: 8),
               if (_isLocked) 
                 _buildLockedDrawerControls(isDark, isRtl)
@@ -730,10 +900,53 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
                           ),
                           const SizedBox(width: 12),
                           Expanded(child: _buildRealTimeWaveform(isDark)),
+=======
+              const SizedBox(width: 16),
+              AnimatedBuilder(
+                animation: _pulseAnimation,
+                builder: (context, child) {
+                  return Transform.scale(
+                    scale: _pulseAnimation.value,
+                    child: const Icon(Icons.mic_rounded,
+                        color: AppTheme.error, size: 20),
+                  );
+                },
+              ),
+              const SizedBox(width: 8),
+              Text(
+                _formatDuration(_duration),
+                style: const TextStyle(
+                    fontWeight: FontWeight.w600, fontSize: 16),
+              ),
+              const SizedBox(width: 16),
+              if (!_isLocked)
+                Expanded(
+                  child: Transform.translate(
+                    offset: Offset(_dragOffset, 0),
+                    child: Opacity(
+                      opacity: (1 - (_dragOffset.abs() / 100)).clamp(0.0, 1.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const Icon(Icons.chevron_left_rounded,
+                              color: Colors.grey),
+                          Text(
+                            'Slide to cancel',
+                            style: TextStyle(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurface
+                                  .withValues(alpha: 0.5),
+                              fontSize: 14,
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
                         ],
                       ),
                     ),
                   ),
+<<<<<<< HEAD
                 ),
               ),
             ],
@@ -864,10 +1077,76 @@ class VoiceRecorderBarState extends State<VoiceRecorderBar>
         const SizedBox(width: 8),
         // Total duration timer
         Text(_formatDurationMs(_previewDuration), style: textStyle),
+=======
+                )
+              else
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: _cancelRecording,
+                        child: const Text('Cancel',
+                            style: TextStyle(color: AppTheme.error)),
+                      ),
+                      IconButton(
+                        onPressed: _stopAndSend,
+                        icon: const Icon(Icons.send_rounded,
+                            color: AppTheme.primary),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ),
+
+        // Lock indicator UI (Swipe up)
+        if (!_isLocked)
+          Positioned(
+            right: 0,
+            bottom: 60 + _verticalDragOffset.abs(),
+            child: Opacity(
+              opacity: (1 - (_verticalDragOffset.abs() / 80)).clamp(0.0, 1.0),
+              child: Column(
+                children: [
+                  const Icon(Icons.lock_open_rounded, color: Colors.grey),
+                  const SizedBox(height: 4),
+                  const Icon(Icons.keyboard_arrow_up_rounded, color: Colors.grey),
+                ],
+              ),
+            ),
+          ),
+
+        // The touch area for the mic when not locked
+        if (!_isLocked && widget.showMicButton)
+          Positioned(
+            right: 0,
+            bottom: 0,
+            child: GestureDetector(
+              onLongPressEnd: (_) {
+                if (_isLocked) return;
+                _stopAndSend();
+              },
+              onLongPressMoveUpdate: _onLongPressMoveUpdate,
+              child: Container(
+                width: 48,
+                height: 48,
+                decoration: const BoxDecoration(
+                  color: AppTheme.primary,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.mic_rounded,
+                    color: Colors.white, size: 24),
+              ),
+            ),
+          ),
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
       ],
     );
   }
 }
+<<<<<<< HEAD
 
 // Custom vector Trash Bin animation drawer element
 class _TrashBinWidget extends StatelessWidget {
@@ -947,3 +1226,5 @@ class _TrashBinWidget extends StatelessWidget {
     );
   }
 }
+=======
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+<<<<<<< HEAD
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:project_test2/core/theme/theme.dart';
 import 'package:project_test2/features/community/data/repositories/group_repository_impl.dart';
@@ -18,13 +19,38 @@ import 'package:project_test2/features/community/presentation/widgets/pinned_mes
 import 'package:project_test2/features/community/presentation/screens/group_info_screen.dart';
 import 'package:project_test2/features/community/presentation/screens/group_search_screen.dart';
 import 'package:project_test2/features/community/presentation/screens/message_info_screen.dart';
+=======
+import 'package:intl/intl.dart';
+import '../../../../core/theme.dart';
+import '../../data/repositories/group_repository_impl.dart';
+import '../../domain/entities/group_message_entity.dart';
+import '../bloc/group_chat/group_chat_bloc.dart';
+import '../bloc/group_chat/group_chat_event.dart';
+import '../bloc/group_chat/group_chat_state.dart';
+import '../bloc/groups_list/groups_list_bloc.dart';
+import '../bloc/groups_list/groups_list_event.dart';
+import '../../../../features/chat/presentation/widgets/mute_bottom_sheet.dart';
+import '../widgets/group_avatar.dart';
+import '../widgets/group_message_bubble.dart';
+import '../widgets/group_typing_indicator.dart';
+import '../widgets/pinned_message_banner.dart';
+import 'group_info_screen.dart';
+import 'group_search_screen.dart';
+import 'message_info_screen.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+<<<<<<< HEAD
 import 'package:project_test2/core/services/storage_service.dart';
 import 'package:project_test2/features/chat/presentation/widgets/voice_recorder_bar.dart';
 import 'package:project_test2/features/community/domain/entities/group_member_entity.dart';
+=======
+import '../../../../services/storage_service.dart';
+import '../../../chat/presentation/widgets/voice_recorder_bar.dart';
+import '../../domain/entities/group_member_entity.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 
 class GroupChatScreen extends StatefulWidget {
@@ -723,7 +749,11 @@ class _InputBar extends StatefulWidget {
   State<_InputBar> createState() => _InputBarState();
 }
 
+<<<<<<< HEAD
 class _InputBarState extends State<_InputBar> with WidgetsBindingObserver {
+=======
+class _InputBarState extends State<_InputBar> {
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
   // ── Functional state ──────────────────────────────────────────────────────
   bool _isRecordingVoice = false;
   bool _isVoiceLocked = false;
@@ -747,7 +777,10 @@ class _InputBarState extends State<_InputBar> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     _focusNode.addListener(_onFocusChange);
+<<<<<<< HEAD
     WidgetsBinding.instance.addObserver(this);
+=======
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
   }
 
   void _onFocusChange() {
@@ -757,6 +790,7 @@ class _InputBarState extends State<_InputBar> with WidgetsBindingObserver {
   }
 
   @override
+<<<<<<< HEAD
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
       if (_isRecordingVoice && !_isVoiceLocked) {
@@ -771,6 +805,9 @@ class _InputBarState extends State<_InputBar> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+=======
+  void dispose() {
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
     _focusNode.removeListener(_onFocusChange);
     _focusNode.dispose();
     super.dispose();
@@ -1133,10 +1170,15 @@ class _InputBarState extends State<_InputBar> with WidgetsBindingObserver {
                   ),
                 );
 
+<<<<<<< HEAD
                 final isRtl = Directionality.of(context) == TextDirection.rtl;
 
                 return Stack(
                   alignment: isRtl ? Alignment.bottomLeft : Alignment.bottomRight,
+=======
+                return Stack(
+                  alignment: Alignment.bottomRight,
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
                   children: [
                     row,
                     if (_isRecordingVoice)
@@ -1162,8 +1204,12 @@ class _InputBarState extends State<_InputBar> with WidgetsBindingObserver {
                       ),
                     if (showMicHold)
                       Positioned(
+<<<<<<< HEAD
                         right: isRtl ? null : 0,
                         left: isRtl ? 0 : null,
+=======
+                        right: 0,
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
                         bottom: 0,
                         child: _BreathingMicButton(
                           voiceRecorderKey: _voiceRecorderKey,

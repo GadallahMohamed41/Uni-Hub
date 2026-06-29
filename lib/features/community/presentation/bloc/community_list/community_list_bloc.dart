@@ -1,10 +1,17 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+<<<<<<< HEAD
 import 'package:project_test2/features/community/domain/entities/community_entity.dart';
 import 'package:project_test2/features/community/domain/repositories/community_repository.dart';
 import 'package:project_test2/features/community/presentation/bloc/community_list/community_list_event.dart';
 import 'package:project_test2/features/community/presentation/bloc/community_list/community_list_state.dart';
+=======
+import '../../../domain/entities/community_entity.dart';
+import '../../../domain/repositories/community_repository.dart';
+import 'community_list_event.dart';
+import 'community_list_state.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class CommunityListBloc
     extends Bloc<CommunityListEvent, CommunityListState> {

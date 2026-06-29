@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+<<<<<<< HEAD
 import 'package:project_test2/core/config/app_config.dart';
 import 'package:project_test2/core/utils/app_snackbar.dart';
 import 'package:project_test2/features/community/domain/entities/group_entity.dart';
 import 'package:project_test2/features/community/presentation/widgets/action_icon_button.dart';
 import 'package:project_test2/features/community/presentation/widgets/invite_qr_bottom_sheet.dart';
+=======
+import '../../../../core/app_config.dart';
+import '../../../../core/app_snackbar.dart';
+import '../../domain/entities/group_entity.dart';
+import 'action_icon_button.dart';
+import 'invite_qr_bottom_sheet.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 /// Displays the invite link row with copy and QR code action buttons.
 /// Follows clean architecture — purely presentational, stateless widget.

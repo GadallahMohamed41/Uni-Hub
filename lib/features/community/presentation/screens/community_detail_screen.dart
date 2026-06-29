@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+<<<<<<< HEAD
 import 'package:project_test2/core/theme/theme.dart';
 import 'package:project_test2/features/auth/presentation/providers/auth_provider.dart';
 import 'package:project_test2/features/community/data/repositories/community_repository_impl.dart';
@@ -15,6 +16,21 @@ import 'package:project_test2/features/community/presentation/widgets/announceme
 import 'package:project_test2/features/community/presentation/screens/community_admin_screen.dart';
 import 'package:project_test2/features/community/presentation/screens/group_chat_screen.dart';
 import 'package:project_test2/features/community/presentation/screens/create_group_screen.dart';
+=======
+import '../../../../../core/theme.dart';
+import '../../../../../providers/auth_provider.dart';
+import '../../data/repositories/community_repository_impl.dart';
+import '../../data/repositories/group_repository_impl.dart';
+import '../bloc/community_detail/community_detail_bloc.dart';
+import '../bloc/community_detail/community_detail_event.dart';
+import '../bloc/community_detail/community_detail_state.dart';
+import '../../domain/entities/community_entity.dart';
+import '../../domain/entities/group_entity.dart';
+import '../widgets/announcement_banner.dart';
+import 'community_admin_screen.dart';
+import 'group_chat_screen.dart';
+import 'create_group_screen.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class CommunityDetailScreen extends StatelessWidget {
   final CommunityEntity community;

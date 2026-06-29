@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+<<<<<<< HEAD
 import 'package:project_test2/core/theme/theme.dart';
 import 'package:project_test2/features/community/domain/entities/group_entity.dart';
 import 'package:project_test2/features/community/presentation/widgets/group_avatar.dart';
+=======
+import '../../../../core/theme.dart';
+import '../../domain/entities/group_entity.dart';
+import 'group_avatar.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 /// WhatsApp-style group list tile with unread accent bar and gradient badge.
 class GroupTile extends StatelessWidget {

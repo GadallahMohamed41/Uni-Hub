@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:project_test2/core/theme/theme.dart';
+=======
+import '../../../../core/theme.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 import 'package:cached_network_image/cached_network_image.dart';
 
 class ReactionUserData {

@@ -3,11 +3,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+<<<<<<< HEAD
 import 'package:project_test2/features/auth/presentation/providers/auth_provider.dart';
 import 'package:project_test2/core/theme/theme.dart';
 import 'package:project_test2/core/utils/app_snackbar.dart';
 import 'package:project_test2/features/community/domain/entities/community_entity.dart';
 import 'package:project_test2/features/community/data/repositories/community_repository_impl.dart';
+=======
+import '../../../../providers/auth_provider.dart';
+import '../../../../core/theme.dart';
+import '../../../../core/app_snackbar.dart';
+import '../../domain/entities/community_entity.dart';
+import '../../data/repositories/community_repository_impl.dart';
+>>>>>>> 5bfe229f9bee06786262c5ea1015fcaa7aed2f3c
 
 class CommunityJoinRequestScreen extends StatefulWidget {
   final CommunityEntity community;
